@@ -1,0 +1,44 @@
+<HTML>
+		<BODY>
+				<canvas id='homework02' width='500' height='400' style='background: #AAAAAA'/>
+		<script>
+				let canvas = document.getElementById('homework02');
+				let ctx = canvas.getContext('2d');
+
+				var data = ctx.getImageData(0, 200, canvas.width, canvas.height);
+
+				console.log(data);
+
+				for (var j=0; j<10; j++) {
+					for (var i=0; i<10; i++) {
+						data.data[500*4*(9+j)+(9+i)*4] = 127;
+						data.data[500*4*(9+j)+(9+i)*4+1] = 255;
+						data.data[500*4*(9+j)+(9+i)*4+3] = 255;
+					}
+				}
+
+				ctx.putImageData(data, 0, 200);				
+				console.log(data);	
+
+				i=0;
+				function draw(){
+					//ctx.clearRect(0,200,canvas.width,canvas.height)
+				  		 i+=10;
+				var img = new Image(); //создает новый объект изображения
+				img.src = "./myImage.png"; //устанавливает путь
+				img.onload = function () {
+						ctx.drawImage(img, i, 200, canvas.width,canvas.height);
+						if(i > canvas.width){
+							i = 0;
+							ctx.clearRect(0,200,canvas.width,canvas.height);
+						}
+				};
+				  }
+
+				setInterval(draw,100);			
+				console.log(data);	
+				
+				
+		</script>
+		</BODY>
+</HTML>
